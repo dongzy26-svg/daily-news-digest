@@ -2,9 +2,8 @@ name: Daily News Digest
 
 on:
   schedule:
-    # 北京时间 07:00 = UTC 23:00（冬令时）或 UTC 22:00（夏令时）
-    # GitHub Actions 使用 UTC 时间，这里设 UTC 23:00，每天准点跑
-    - cron: '0 23 * * *'
+    # 北京时间 20:00 = UTC 12:00（中国不实行夏令时）
+    - cron: '0 12 * * *'
   workflow_dispatch:  # 允许手动触发（方便测试）
 
 jobs:
@@ -30,4 +29,5 @@ jobs:
           SENDER_PASSWORD: ${{ secrets.SENDER_PASSWORD }}
           RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
           NEWSAPI_KEY: ${{ secrets.NEWSAPI_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: python news_digest.py
